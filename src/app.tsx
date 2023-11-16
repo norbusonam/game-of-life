@@ -1,11 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getNextGridState, initializeGrid } from "./game-utils";
 import { Grid } from "./components/grid";
+
+const MIN_SPEED = 1;
+const MAX_SPEED = 20;
 
 export function App() {
   const [cells, setCells] = useState<boolean[][]>(initializeGrid(50, 50));
   const [intervalId, setIntervalId] = useState<number | null>(null);
+  const [updatesPerSecond, setUpdatesPerSecond] = useState<number>(2);
   const isRunning = intervalId !== null;
+
+  useEffect(() => {
+    if (isRunning) {
+      onStop();
+      onStart();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [updatesPerSecond]);
 
   const onCellClick = (x: number, y: number) => {
     const newCells = [...cells];
@@ -16,7 +28,7 @@ export function App() {
   const onStart = () => {
     const id = setInterval(() => {
       setCells((prev) => getNextGridState(prev));
-    }, 500);
+    }, 1000 / updatesPerSecond);
     setIntervalId(id);
   };
 
@@ -30,6 +42,13 @@ export function App() {
   const onReset = () => {
     onStop();
     setCells(initializeGrid(50, 50));
+  };
+
+  const onUpdatesPerSecondChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value, 10);
+    if (value >= MIN_SPEED && value <= MAX_SPEED) {
+      setUpdatesPerSecond(value);
+    }
   };
 
   return (
@@ -51,6 +70,17 @@ export function App() {
           stop
         </button>
         <button onClick={onReset}>reset</button>
+        <label htmlFor="speed">Updates per second</label>
+        <input
+          id="speed"
+          type="number"
+          defaultValue="2"
+          min={MIN_SPEED}
+          max={MAX_SPEED}
+          step="1"
+          value={updatesPerSecond}
+          onChange={onUpdatesPerSecondChange}
+        />
       </div>
     </div>
   );
