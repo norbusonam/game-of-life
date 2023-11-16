@@ -46,11 +46,11 @@ export function App() {
     setCells(initializeGrid(50, 50));
   };
 
-  const onUpdatesPerSecondChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value, 10);
-    if (value >= MIN_SPEED && value <= MAX_SPEED) {
-      setUpdatesPerSecond(value);
+  const onSpeedChange = (newSpeed: number) => {
+    if (newSpeed < MIN_SPEED || newSpeed > MAX_SPEED) {
+      return;
     }
+    setUpdatesPerSecond(newSpeed);
   };
 
   return (
@@ -72,17 +72,13 @@ export function App() {
           stop
         </button>
         <button onClick={onReset}>reset</button>
-        <label htmlFor="speed">Updates per second</label>
-        <input
-          id="speed"
-          type="number"
-          defaultValue={DEFAULT_SPEED}
-          min={MIN_SPEED}
-          max={MAX_SPEED}
-          step="1"
-          value={updatesPerSecond}
-          onChange={onUpdatesPerSecondChange}
-        />
+        <button onClick={() => onSpeedChange(updatesPerSecond + 1)}>
+          faster
+        </button>
+        <span>{updatesPerSecond} updates per second</span>
+        <button onClick={() => onSpeedChange(updatesPerSecond - 1)}>
+          slower
+        </button>
       </div>
     </div>
   );
