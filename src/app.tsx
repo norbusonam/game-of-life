@@ -4,11 +4,13 @@ import { Grid } from "./components/grid";
 
 const MIN_SPEED = 1;
 const MAX_SPEED = 20;
+const DEFAULT_SPEED = 2;
 
 export function App() {
   const [cells, setCells] = useState<boolean[][]>(initializeGrid(50, 50));
   const [intervalId, setIntervalId] = useState<number | null>(null);
-  const [updatesPerSecond, setUpdatesPerSecond] = useState<number>(2);
+  const [updatesPerSecond, setUpdatesPerSecond] =
+    useState<number>(DEFAULT_SPEED);
   const isRunning = intervalId !== null;
 
   useEffect(() => {
@@ -74,7 +76,7 @@ export function App() {
         <input
           id="speed"
           type="number"
-          defaultValue="2"
+          defaultValue={DEFAULT_SPEED}
           min={MIN_SPEED}
           max={MAX_SPEED}
           step="1"
