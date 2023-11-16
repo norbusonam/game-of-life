@@ -72,11 +72,19 @@ export function App() {
           stop
         </button>
         <button onClick={onReset}>reset</button>
-        <button onClick={() => onSpeedChange(updatesPerSecond - 1)}>
+        <button
+          disabled={updatesPerSecond === MIN_SPEED}
+          onClick={() => onSpeedChange(updatesPerSecond - 1)}
+          className="disabled:opacity-50"
+        >
           slower
         </button>
         <span>{updatesPerSecond} updates per second</span>
-        <button onClick={() => onSpeedChange(updatesPerSecond + 1)}>
+        <button
+          disabled={updatesPerSecond === MAX_SPEED}
+          onClick={() => onSpeedChange(updatesPerSecond + 1)}
+          className="disabled:opacity-50"
+        >
           faster
         </button>
       </div>
