@@ -43,6 +43,7 @@ export function App() {
 
   const onReset = () => {
     onStop();
+    setUpdatesPerSecond(DEFAULT_SPEED);
     setCells(initializeGrid(50, 50));
   };
 
