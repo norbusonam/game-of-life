@@ -60,14 +60,14 @@ export function App() {
         <button
           onClick={onStart}
           disabled={isRunning}
-          className="disabled:opacity-50"
+          className="disabled:opacity-50 disabled:cursor-not-allowed"
         >
           start
         </button>
         <button
           onClick={onStop}
           disabled={!isRunning}
-          className="disabled:opacity-50"
+          className="disabled:opacity-50 disabled:cursor-not-allowed"
         >
           stop
         </button>
@@ -75,7 +75,7 @@ export function App() {
         <button
           disabled={updatesPerSecond === MIN_SPEED}
           onClick={() => onSpeedChange(updatesPerSecond - 1)}
-          className="disabled:opacity-50"
+          className="disabled:opacity-50 disabled:cursor-not-allowed"
         >
           slower
         </button>
@@ -83,7 +83,7 @@ export function App() {
         <button
           disabled={updatesPerSecond === MAX_SPEED}
           onClick={() => onSpeedChange(updatesPerSecond + 1)}
-          className="disabled:opacity-50"
+          className="disabled:opacity-50 disabled:cursor-not-allowed"
         >
           faster
         </button>
