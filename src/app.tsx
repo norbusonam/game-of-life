@@ -9,6 +9,7 @@ const DEFAULT_SPEED = 2;
 export function App() {
   const [cells, setCells] = useState<boolean[][]>(initializeGrid(50, 50));
   const [intervalId, setIntervalId] = useState<number | null>(null);
+  const [iterations, setIterations] = useState(0);
   const [updatesPerSecond, setUpdatesPerSecond] =
     useState<number>(DEFAULT_SPEED);
   const isRunning = intervalId !== null;
@@ -30,6 +31,7 @@ export function App() {
   const onStart = () => {
     const id = setInterval(() => {
       setCells((prev) => getNextGridState(prev));
+      setIterations((prev) => prev + 1);
     }, 1000 / updatesPerSecond);
     setIntervalId(id);
   };
@@ -45,6 +47,7 @@ export function App() {
     onStop();
     setUpdatesPerSecond(DEFAULT_SPEED);
     setCells(initializeGrid(50, 50));
+    setIterations(0);
   };
 
   const onSpeedChange = (newSpeed: number) => {
@@ -73,6 +76,7 @@ export function App() {
           >
             stop
           </button>
+          <span>{iterations} iterations</span>
         </div>
         <button onClick={onReset}>reset</button>
         <div className="space-x-2">
