@@ -62,20 +62,11 @@ export function App() {
       <Grid width={50} height={50} cells={cells} onCellClick={onCellClick} />
       <div className="flex justify-between">
         <div className="space-x-2">
-          <button
-            onClick={onStart}
-            disabled={isRunning}
-            className="disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
-          >
-            start
-          </button>
-          <button
-            onClick={onStop}
-            disabled={!isRunning}
-            className="disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
-          >
-            stop
-          </button>
+          {isRunning ? (
+            <button onClick={onStop}>stop</button>
+          ) : (
+            <button onClick={onStart}>start</button>
+          )}
           <span>{iterations} iterations</span>
         </div>
         <button onClick={onReset}>reset</button>
