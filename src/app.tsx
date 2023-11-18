@@ -67,7 +67,9 @@ export function App() {
           ) : (
             <button onClick={onStart}>start</button>
           )}
-          <span>{iterations} iterations</span>
+          <span>
+            {iterations} {iterations === 1 ? "iteration" : "iterations"}
+          </span>
         </div>
         <button onClick={onReset}>reset</button>
         <div className="space-x-2">
