@@ -1,6 +1,4 @@
 type Props = {
-  width: number;
-  height: number;
   cells: boolean[][];
   onCellClick: (x: number, y: number) => void;
 };

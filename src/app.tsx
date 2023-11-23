@@ -62,7 +62,7 @@ export function App() {
       <h1 className="text-xl font-semibold mb-4 text-center">
         Conway's Game of Life
       </h1>
-      <Grid width={50} height={50} cells={cells} onCellClick={onCellClick} />
+      <Grid cells={cells} onCellClick={onCellClick} />
       <div className="flex justify-between">
         <div className="space-x-2">
           {isRunning ? (
