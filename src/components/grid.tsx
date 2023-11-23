@@ -13,7 +13,7 @@ export function Grid(props: Props) {
           {row.map((isAlive, x) => (
             <button
               key={`${x}-${y}`}
-              className={`w-4 h-4 transition-colors duration-75 aspect-square ${
+              className={`grow transition-colors duration-75 aspect-square ${
                 isAlive ? "bg-green-500" : "bg-neutral-500"
               }`}
               onClick={() => props.onCellClick(x, y)}
